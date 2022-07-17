@@ -1,5 +1,5 @@
-#ifndef EZLIB_LOCKER_RWMUTEX_HPP_
-#define EZLIB_LOCKER_RWMUTEX_HPP_
+#ifndef EZLIB_THREAD_LOCKER_RWMUTEX_HPP_
+#define EZLIB_THREAD_LOCKER_RWMUTEX_HPP_
 
 #include <atomic>
 #include <mutex>
@@ -60,4 +60,4 @@ void RWMutex<Mutex>::UnLock() {
 } // namespace locker
 
 
-#endif  // EZLIB_LOCKER_RWMUTEX_HPP_
+#endif  // EZLIB_THREAD_LOCKER_RWMUTEX_HPP_

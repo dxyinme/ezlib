@@ -8,7 +8,7 @@ cc_test(
   deps = [
     "@gtest",
     "@gtest//:gtest_main",
-    "//locker:locker"
+    "//thread/locker:locker"
   ],
   copts = [
     "-lpthread"
