@@ -1,6 +1,7 @@
 #include "threadpool.hpp"
 #include <iostream>
 #include "thread/timeup/tick.hpp"
+#include <unistd.h>
 
 namespace threadpool_test {
 
@@ -19,10 +20,9 @@ public:
   }
 };
 
-void RunThread(int ThreadNum) {
-  const int N = 100;
-  const int BMAX = 1000000;
-  ThPool thpool(ThreadNum);
+void RunThread(ThPool & thpool) {
+  const int N = 4;
+  const int BMAX = 10000000;
   std::vector<std::shared_ptr<CalcTask>> ptr_v;
   for (int i = 0; i < N; i++) {
     auto now_ptr = std::make_shared<CalcTask>(i);
@@ -39,12 +39,13 @@ void RunThread(int ThreadNum) {
 
 }  // namespace threadpool_test
 
-
 int main(int argc, char ** argv) {
+  ThPool th4(4);
+  ThPool th1(1);
   timeup::Tick tick;
-  threadpool_test::RunThread(8);
-  std::cout << "8thread:" << tick.T() << "ms" << std::endl;
-  threadpool_test::RunThread(1);
+  threadpool_test::RunThread(th4);
+  std::cout << "4thread:" << tick.T() << "ms" << std::endl;
+  threadpool_test::RunThread(th1);
   std::cout << "1thread:" << tick.T() << "ms" << std::endl;
   return 0;
 }

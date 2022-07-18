@@ -44,13 +44,16 @@ ThPool::ThPool(int num) {
   for (int i = 0; i < num; i++) {
     thp_.emplace_back(std::thread([&] {
       for (;;) {
-        std::unique_lock<std::mutex> _(q_mtx_);
-        cv_.wait(_, [&] { return is_done_ || !task_queue_.empty();});
-        if (is_done_) {
-          break;
+        std::shared_ptr<ThTask> t_ptr;
+        {
+          std::unique_lock<std::mutex> _(q_mtx_);
+          cv_.wait(_, [&] { return is_done_ || !task_queue_.empty();});
+          if (is_done_) {
+            break;
+          }
+          t_ptr = task_queue_.front();
+          task_queue_.pop();
         }
-        auto t_ptr = task_queue_.front();
-        task_queue_.pop();
         t_ptr->SetBeginTime();
         t_ptr->TaskDo();
         t_ptr->Done();
