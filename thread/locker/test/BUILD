@@ -10,7 +10,7 @@ cc_test(
     "@gtest//:gtest_main",
     "//thread/locker:locker"
   ],
-  copts = [
-    "-lpthread"
+  linkopts = [
+    "-pthread"
   ]
 )
