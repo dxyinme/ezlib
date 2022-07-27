@@ -28,4 +28,5 @@ jobs:
       run: |
         bazelisk build necfs:necfs
         bazelisk build necfs/test:inireader_test
-
+        bazelisk build thread/threadpool:threadpool
+        bazelisk build thread/threadpool:threadpool_example
