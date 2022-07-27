@@ -1,0 +1,31 @@
+name: bazel CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+    
+    - name: Set up bazel
+      run:
+        - echo "install bazelisk" 
+        - go install github.com/bazelbuild/bazelisk@latest
+
+    - name: Build
+      run: 
+        - bazelisk build necfs:necfs
+        - bazelisk build necfs/test:inireader_test
+
