@@ -7,7 +7,7 @@ namespace xzone::calcsvr {
   const ::xzone::common::BaseTestMsg* req, 
   ::xzone::common::BaseTestMsg* resp) {
   
-  resp->set_msg(req->msg());
+  resp->set_msg("base_test: " + req->msg());
 
   return ::grpc::Status::OK;
 }

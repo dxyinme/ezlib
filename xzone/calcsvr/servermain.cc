@@ -1,12 +1,9 @@
 #include <grpcpp/grpcpp.h>
-#include <grpcpp/ext/proto_server_reflection_plugin.h>
-
 #include "calcserviceimpl.h"
 
 int main() {
   std::string addr("0.0.0.0:50051");
   xzone::calcsvr::CalcSvrImpl impl;
-  grpc::reflection::InitProtoReflectionServerBuilderPlugin();
   grpc::ServerBuilder builder;
   builder.AddListeningPort(addr, grpc::InsecureServerCredentials());
   builder.RegisterService(&impl);
