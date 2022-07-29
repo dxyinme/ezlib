@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "xzone/common/base.proto";
+
+package xzone.calcsvr;
+
+service Calc {
+  rpc BaseTest(xzone.common.BaseTestMsg) returns (xzone.common.BaseTestMsg);
+}
